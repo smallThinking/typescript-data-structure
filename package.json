@@ -1,0 +1,10 @@
+{
+  "name": "typescript-data-structure",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "smallThinking <wnsdnek778@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tsc-watch": "^1.0.30"
+  }
+}
