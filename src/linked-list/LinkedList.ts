@@ -56,6 +56,7 @@ export class LinkedList {
     return null;
   }
 
+
   //Delete
   public delete = (data: number|string): LinkedListNode => {
     if(!this.head) {
@@ -89,6 +90,21 @@ export class LinkedList {
     }
 
     return deleteNode;
+  }
+
+
+
+  //데이터를 array형태로 추출
+  public toArray = ():Array<number|string> => {
+    let nodes = [];
+
+    let currentNode = this.head;
+    while(currentNode) {
+      nodes.push(currentNode.data);
+      currentNode = currentNode.next;
+    }
+
+    return nodes;
   }
 
   //Traverse

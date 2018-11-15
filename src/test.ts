@@ -11,6 +11,8 @@ node.append('node 12');
 
 console.log(node.delete('node 12'));
 console.log(node.delete(2));
+console.log(node.toArray());
+
 console.log(JSON.stringify(node, null, 4));
 
 
