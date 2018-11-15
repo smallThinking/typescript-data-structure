@@ -5,7 +5,7 @@
   "author": "smallThinking <wnsdnek778@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "tsc-watch --onSuccess \" node dist/test.js\" "
+    "start": "tsc-watch --onSuccess \" node dist/stack/test.js\" "
   },
   "devDependencies": {
     "tsc-watch": "^1.0.30"

@@ -1,5 +1,5 @@
-import {LinkedList} from './linked-list/LinkedList';
-import {LinkedListNode} from './linked-list/LinkedListNode';
+import {LinkedList} from './LinkedList';
+import {LinkedListNode} from './LinkedListNode';
 
 let node = new LinkedList(new LinkedListNode('node 0'));
 

@@ -92,15 +92,55 @@ export class LinkedList {
     return deleteNode;
   }
 
+  public deleteHead = (): LinkedListNode => {
+    if(!this.head){
+      return null;
+    }
+    
+    let currentNode = this.head;
+
+    if(this.head.next){
+      this.head = currentNode.next;
+    }else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return currentNode;
+  }
 
 
+
+  public deleteTail = (): LinkedListNode => {
+    const deletedTail = this.tail;
+
+    if(this.head === this.tail){
+      this.head = null;
+      this.tail = null;
+
+      return deletedTail;
+    }
+
+    let currentNode = this.head;
+    while(currentNode.next){
+      if(!currentNode.next.next){
+        currentNode.next = null;
+      } else{
+        currentNode = currentNode.next;
+      }
+    }
+
+    this.tail = currentNode;
+
+    return deletedTail;
+  }
   //데이터를 array형태로 추출
-  public toArray = ():Array<number|string> => {
+  public toArray = ():Array<LinkedListNode> => {
     let nodes = [];
 
     let currentNode = this.head;
     while(currentNode) {
-      nodes.push(currentNode.data);
+      nodes.push(currentNode);
       currentNode = currentNode.next;
     }
 
