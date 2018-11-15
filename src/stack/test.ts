@@ -13,4 +13,5 @@ console.log(stack.pop());
 console.log(stack.pop());
 console.log(stack.pop());
 stack.push("7");
+console.log(stack.toArray());
 console.log(stack.pop());
