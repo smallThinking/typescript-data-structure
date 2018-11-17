@@ -1,4 +1,4 @@
-export interface CompareCallBack {
-  (a: number|string, b: number|string): number;
+export interface CompareCallBack<T> {
+  (a: T, b:T): number;
 }
 

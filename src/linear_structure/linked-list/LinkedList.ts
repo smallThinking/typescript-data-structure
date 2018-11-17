@@ -1,16 +1,20 @@
 import {LinkedListNode} from './LinkedListNode';
+import {Comparator} from '../../comparator/Comparator';
 
-export class LinkedList {
-  public head: LinkedListNode;
-  public tail: LinkedListNode;
+export class LinkedList<T> {
+  public head: LinkedListNode<T>;
+  public tail: LinkedListNode<T>;
+  private compare: Comparator<T>;
 
-  constructor(node: LinkedListNode = null) {
-    this.head = node;
-    this.tail = node;
+  constructor(comparatorFunction?) {
+    this.head = null;
+    this.tail = null;
+
+    this.compare = new Comparator<T>(comparatorFunction);
   }
 
   //append(뒤에 삽입)
-  public append = (data: number|string): LinkedList => {
+  public append = (data: T): LinkedList<T> => {
     const newNode = new LinkedListNode(data, null);
     if(!this.head) {
       //노드가 없으면?
@@ -27,7 +31,7 @@ export class LinkedList {
 
 
   //prepend(앞에 삽입)
-  public prepend = (data: number|string): LinkedList => {
+  public prepend = (data: T): LinkedList<T> => {
     const newNode = new LinkedListNode(data, this.head);
     this.head = newNode;
 
@@ -40,7 +44,7 @@ export class LinkedList {
 
 
   //find
-  public find = (data: number|string): LinkedListNode => {
+  public find = (data: T): LinkedListNode<T> => {
     if(!this.head) {
       return null;
     }
@@ -48,7 +52,7 @@ export class LinkedList {
     let currentNode = this.head;
 
     while(currentNode){
-      if(currentNode.data === data) {
+      if(this.compare.equal(currentNode.data, data)) {
         return currentNode;
       }
       currentNode = currentNode.next;
@@ -58,7 +62,7 @@ export class LinkedList {
 
 
   //Delete
-  public delete = (data: number|string): LinkedListNode => {
+  public delete = (data: T): LinkedListNode<T> => {
     if(!this.head) {
       //비어있는 리스트이면
       return null;
@@ -67,7 +71,7 @@ export class LinkedList {
     let deleteNode = null;
 
     // 지워야 할 것이  처음인 경우
-    if(this.head.data === data){
+    if(this.compare.equal(this.head.data, data)){
       deleteNode = this.head;
       this.head = this.head.next;
       return deleteNode;
@@ -76,7 +80,7 @@ export class LinkedList {
     let currentNode = this.head;
 
     while(currentNode.next){
-      if(currentNode.next.data === data) {
+      if(this.compare.equal(currentNode.next.data, data)) {
         deleteNode = currentNode.next;
         currentNode.next = deleteNode.next;
       } else {
@@ -85,14 +89,14 @@ export class LinkedList {
     }
 
     // 지워야 할 것이  마지막인 경우
-    if(this.tail.data === data) {
+    if(this.compare.equal(this.tail.data, data)) {
       this.tail = currentNode;
     }
 
     return deleteNode;
   }
 
-  public deleteHead = (): LinkedListNode => {
+  public deleteHead = (): LinkedListNode<T> => {
     if(!this.head){
       return null;
     }
@@ -111,7 +115,7 @@ export class LinkedList {
 
 
 
-  public deleteTail = (): LinkedListNode => {
+  public deleteTail = (): LinkedListNode<T> => {
     const deletedTail = this.tail;
 
     if(this.head === this.tail){
@@ -135,7 +139,7 @@ export class LinkedList {
     return deletedTail;
   }
   //데이터를 array형태로 추출
-  public toArray = ():Array<LinkedListNode> => {
+  public toArray = ():Array<LinkedListNode<T>> => {
     let nodes = [];
 
     let currentNode = this.head;

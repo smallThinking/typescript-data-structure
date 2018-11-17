@@ -1,31 +1,39 @@
 import { CompareCallBack } from "./CompareCallBack";
 
-export class Comparator {
-  private compare: CompareCallBack;
-  constructor(compareFunction?: CompareCallBack) {
-    this.compare = compareFunction || Comparator.defaultCompareFunction;
+export class Comparator<T> {
+  private compare: CompareCallBack<T>;
+
+  constructor(compareFunction?: CompareCallBack<T>) {
+    this.compare = compareFunction || this.defaultCompareFunction;
   }
-  static defaultCompareFunction = (a: number | string, b: number | string): number => {
+  
+  private defaultCompareFunction = (a: T, b: T): number => {
     if (a === b) {
       return 0;
     }
     return a < b ? -1 : 1;
   };
-  public equal = (a: number | string, b: number | string): boolean => {
+
+  public equal = (a: T, b: T): boolean => {
     return this.compare(a, b) === 0;
   };
-  public lessThan = (a: number | string, b: number | string): boolean => {
+
+  public lessThan = (a: T, b: T): boolean => {
     return this.compare(a, b) < 0;
   };
-  public greaterThan = (a: number | string, b: number | string): boolean => {
+
+  public greaterThan = (a: T, b: T): boolean => {
     return this.compare(a, b) > 0;
   };
-  public lessThanOrEqual = (a: number | string, b: number | string): boolean => {
+
+  public lessThanOrEqual = (a: T, b: T): boolean => {
     return this.lessThan(a, b) || this.equal(a, b);
   };
-  public greaterThanOrEqual = (a: number | string, b: number | string): boolean => {
+
+  public greaterThanOrEqual = (a: T, b: T): boolean => {
     return this.greaterThan(a, b) || this.equal(a, b);
   };
+  
   public reverse = () => {
     const compareOriginal = this.compare;
     this.compare = (a, b) => compareOriginal(b, a);

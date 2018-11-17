@@ -1,10 +1,10 @@
 import {LinkedList} from '../linked-list/LinkedList';
 
-export class Stack {
-  public linkedList: LinkedList;
+export class Stack<T> {
+  public linkedList: LinkedList<T>;
 
   constructor() {
-    this.linkedList = new LinkedList;
+    this.linkedList = new LinkedList();
   }
 
   //있는지 없는지 확인
@@ -14,7 +14,7 @@ export class Stack {
 
 
   //다음에 나올 데이터 확인
-  public peek = (): number|string => {
+  public peek = (): T => {
     if(!this.linkedList.head){
       return null;
     }
@@ -30,15 +30,15 @@ export class Stack {
 
 
   //데이터 꺼내기
-  public pop = ():number|string => {
+  public pop = ():T => {
     const removedHead = this.linkedList.deleteHead();
 
     return removedHead ? removedHead.data : null;
   }
 
-  
+
   //데이터를 array형태로 변환
-  public toArray = (): Array<number|string> => {
+  public toArray = (): Array<T> => {
     return this.linkedList.toArray().map(node => node.data);
   }
 }

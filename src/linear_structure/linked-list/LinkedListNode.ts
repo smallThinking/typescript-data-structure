@@ -1,13 +1,13 @@
-export class LinkedListNode {
-  public data: number|string;
-  public next: LinkedListNode;
+export class LinkedListNode<T> {
+  public data: T;
+  public next: LinkedListNode<T>;
 
-  public constructor(data: number|string, next: LinkedListNode = null) {
+  public constructor(data: T, next: LinkedListNode<T> = null) {
     this.data = data;
     this.next = next;
   }
 
-  // public toString = (callback? : () => void): string => {
-  //   return  callback ? callback(this.data) : `$this.value`;
-  // }
+  public toString = (callback): string => {
+    return  callback ? callback(this.data) : `${this.data}`;
+  }
 }

@@ -2,8 +2,8 @@ import {LinkedList} from '../linked-list/LinkedList';
 /*
 * FIFO queue
 */
-export class Queue {
-  public linkedList: LinkedList;
+export class Queue<T> {
+  public linkedList: LinkedList<T>;
   constructor() {
     this.linkedList = new LinkedList();
   }
@@ -22,12 +22,12 @@ export class Queue {
   }
 
   // 큐 삽입
-  public enqueue = (data: number|string) => {
+  public enqueue = (data: T) => {
     return this.linkedList.append(data);
   }
 
   // 큐 내보내기
-  public dequeue = ():number|string => {
+  public dequeue = ():T => {
     let deletedNode = this.linkedList.deleteHead();
     return deletedNode ? deletedNode.data : null;
   }
