@@ -4,7 +4,7 @@ export class Stack<T> {
   public linkedList: LinkedList<T>;
 
   constructor() {
-    this.linkedList = new LinkedList();
+    this.linkedList = new LinkedList<T>();
   }
 
   //있는지 없는지 확인

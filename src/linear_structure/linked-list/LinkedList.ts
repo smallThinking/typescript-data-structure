@@ -44,7 +44,7 @@ export class LinkedList<T> {
 
 
   //find
-  public find = (data: T): LinkedListNode<T> => {
+  public find = ({ data = undefined, callback = undefined }): LinkedListNode<T> => {
     if(!this.head) {
       return null;
     }
@@ -52,7 +52,11 @@ export class LinkedList<T> {
     let currentNode = this.head;
 
     while(currentNode){
-      if(this.compare.equal(currentNode.data, data)) {
+      if(callback && callback(currentNode.data)){
+        return currentNode;
+      }
+      
+      if(data !== undefined && this.compare.equal(currentNode.data, data)) {
         return currentNode;
       }
       currentNode = currentNode.next;

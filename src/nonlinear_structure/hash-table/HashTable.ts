@@ -1,11 +1,16 @@
 import { LinkedList } from '../../linear_structure/linked-list/LinkedList';
 
-export class HashTable<T> {
-  public buckets:Array<LinkedList<T>>;
+interface hashNode {
+  key: string,
+  value: any
+}
+
+export class HashTable {
+  public buckets:Array<LinkedList<hashNode>>;
   public keys: object;
 
   constructor(hashTableSize: number = 32){
-    this.buckets = Array(hashTableSize).fill(null).map(() => new LinkedList());
+    this.buckets = Array(hashTableSize).fill(null).map(() => new LinkedList<hashNode>());
     this.keys = {};
   }
 
@@ -19,9 +24,44 @@ export class HashTable<T> {
     return hash % this.buckets.length;
   }
 
-  public set = (key:string, value:any) => {
+  public set = (key: string, value: any) => {
     const keyHash = this.hash(key);
     this.keys[key] = keyHash;
     const bucketLinkedList = this.buckets[keyHash];
+    const node = bucketLinkedList.find({callback: nodeData => nodeData.key === key});
+
+    if(!node) {
+      bucketLinkedList.append({key, value});
+    }else{
+      node.data.value = value; 
+    }
+  }
+
+  public delete = (key: string) => {
+    const keyHash = this.keys[key];
+    delete this.keys[key];
+    const bucketLinkedList = this.buckets[keyHash];
+    const node = bucketLinkedList.find({callback: nodeData => nodeData.key === key});
+
+    if(node) {
+      return bucketLinkedList.delete(node.data);
+    }
+
+    return null;
+  }
+
+  public get = (key: string) => {
+    const bucketLinkedList = this.buckets[this.hash(key)];
+    const node = bucketLinkedList.find({callback: nodeData => nodeData.key === key});
+
+    return node ? node.data.value : undefined;
+  }
+
+  public has = (key: string) => {
+    return Object.hasOwnProperty.call(this.keys, key);
+  }
+
+  public getKeys = () => {
+    return Object.keys(this.keys);
   }
 }

@@ -5,7 +5,7 @@ import {LinkedList} from '../linked-list/LinkedList';
 export class Queue<T> {
   public linkedList: LinkedList<T>;
   constructor() {
-    this.linkedList = new LinkedList();
+    this.linkedList = new LinkedList<T>();
   }
 
   // 비어있는지

@@ -1,13 +1,11 @@
-import { Comparator as _Comparator } from "./comparator/Comparator";
+import {HashTable} from './nonlinear_structure/hash-table/HashTable';
 
-let comparator = new _Comparator();
+let hash = new HashTable();
 
-console.log(comparator.equal("12", "123"));
-console.log(comparator.lessThan(1, 2));
-comparator.reverse();
-console.log(comparator.equal("12", "123"));
-console.log(comparator.lessThan(1, 2));
-comparator.reverse();
-console.log(comparator.equal("12", "123"));
-console.log(comparator.lessThan(1, 2));
+hash.set('jeong', 1);
+hash.set('jeong', 2);
+hash.set('kim', 1);
+hash.set('hong', 3);
+hash.set('lee', 3);
 
+console.log(hash.get('jeong'));
